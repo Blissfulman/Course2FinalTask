@@ -22,6 +22,10 @@ class FeedTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let postImageGR = UITapGestureRecognizer(target: self, action: #selector(tapPostImage(recognizer:)))
+//        postImageGR.numberOfTapsRequired = 2
+        avatarImage.addGestureRecognizer(postImageGR)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,5 +66,16 @@ class FeedTableViewCell: UITableViewCell {
         descriptionLabel.text = post.description
     }
     
-    
+    @objc func tapPostImage(recognizer: UITapGestureRecognizer) {
+        bigLikeImage.alpha = 1
+//        let likeAnimation = CAKeyframeAnimation(keyPath: "alpha")
+//        likeAnimation.values = [0, 1, 1, 0]
+//        likeAnimation.keyTimes = [0, 0.1, 0.3, 0.6]
+//        likeAnimation.timingFunctions = [
+//            CAMediaTimingFunction(name:CAMediaTimingFunctionName.linear),
+//            CAMediaTimingFunction(name:CAMediaTimingFunctionName.linear),
+//            CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeOut)]
+//        likeAnimation.duration = 0.6
+//        bigLikeImage.layer.add(likeAnimation, forKey: nil)
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import DataProvider
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
         
     @IBOutlet weak var feedTableView: UITableView!
         
@@ -36,6 +36,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! FeedTableViewCell
         cell.fillingCell(posts[indexPath.row])
+//        cell.delegate = self
         return cell
     }
 }

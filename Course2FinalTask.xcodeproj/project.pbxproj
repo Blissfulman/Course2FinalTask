@@ -18,6 +18,9 @@
 		CECB0BFB24C86E870086A593 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB0BFA24C86E870086A593 /* Main.storyboard */; };
 		CECB0BFD24C86FFA0086A593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CECB0BFC24C86FFA0086A593 /* LaunchScreen.storyboard */; };
 		CECB0BFF24C8725D0086A593 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB0BFE24C8725D0086A593 /* FeedViewController.swift */; };
+		CED3279024DE6E4000BB1A80 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED3278F24DE6E4000BB1A80 /* PhotoCollectionViewCell.xib */; };
+		CED3279424DED5EC00BB1A80 /* HeaderProfileCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED3279324DED5EC00BB1A80 /* HeaderProfileCollectionView.xib */; };
+		CED3279624DED6D200BB1A80 /* HeaderProfileCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3279524DED6D200BB1A80 /* HeaderProfileCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +50,9 @@
 		CECB0BFA24C86E870086A593 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CECB0BFC24C86FFA0086A593 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Course2FinalTask/Supporting Files/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		CECB0BFE24C8725D0086A593 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		CED3278F24DE6E4000BB1A80 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		CED3279324DED5EC00BB1A80 /* HeaderProfileCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderProfileCollectionView.xib; sourceTree = "<group>"; };
+		CED3279524DED6D200BB1A80 /* HeaderProfileCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,12 +97,10 @@
 		74B7927B202B3427006BCB41 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				CE6E2D5324D96A4C00A4B08B /* Data.swift */,
-				CECB0BFE24C8725D0086A593 /* FeedViewController.swift */,
-				CE6E2D5524D9BD3300A4B08B /* FeedTableViewCell.swift */,
-				CE6E2D5124D947DA00A4B08B /* ProfileViewController.swift */,
-				CEB0222324DD79C3009D0615 /* PhotoCollectionViewCell.swift */,
+				CED3279724DEE22900BB1A80 /* Feed */,
+				CED3279824DEE23C00BB1A80 /* Profile */,
+				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				CECB0BFA24C86E870086A593 /* Main.storyboard */,
 			);
 			path = Code;
@@ -117,6 +121,27 @@
 				74B79263202B3254006BCB41 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CED3279724DEE22900BB1A80 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				CECB0BFE24C8725D0086A593 /* FeedViewController.swift */,
+				CE6E2D5524D9BD3300A4B08B /* FeedTableViewCell.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		CED3279824DEE23C00BB1A80 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE6E2D5124D947DA00A4B08B /* ProfileViewController.swift */,
+				CEB0222324DD79C3009D0615 /* PhotoCollectionViewCell.swift */,
+				CED3278F24DE6E4000BB1A80 /* PhotoCollectionViewCell.xib */,
+				CED3279524DED6D200BB1A80 /* HeaderProfileCollectionView.swift */,
+				CED3279324DED5EC00BB1A80 /* HeaderProfileCollectionView.xib */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,7 +205,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED3279024DE6E4000BB1A80 /* PhotoCollectionViewCell.xib in Resources */,
 				CECB0BFD24C86FFA0086A593 /* LaunchScreen.storyboard in Resources */,
+				CED3279424DED5EC00BB1A80 /* HeaderProfileCollectionView.xib in Resources */,
 				74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */,
 				CECB0BFB24C86E870086A593 /* Main.storyboard in Resources */,
 			);
@@ -198,6 +225,7 @@
 				CE6E2D5424D96A4C00A4B08B /* Data.swift in Sources */,
 				CE6E2D5224D947DA00A4B08B /* ProfileViewController.swift in Sources */,
 				CE6E2D5624D9BD3300A4B08B /* FeedTableViewCell.swift in Sources */,
+				CED3279624DED6D200BB1A80 /* HeaderProfileCollectionView.swift in Sources */,
 				CEB0222424DD79C3009D0615 /* PhotoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
