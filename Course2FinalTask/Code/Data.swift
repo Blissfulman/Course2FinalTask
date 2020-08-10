@@ -11,5 +11,5 @@ import DataProvider
 
 let posts = DataProviders.shared.postsDataProvider.feed()
 let currentUser = DataProviders.shared.usersDataProvider.currentUser()
-
+//let likes = [DataProviders.shared.postsDataProvider.]
 //    var followers: [(userID: User.Identifier, followingID: User.Identifier)]

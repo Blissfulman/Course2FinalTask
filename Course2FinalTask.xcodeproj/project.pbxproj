@@ -11,6 +11,11 @@
 		7484B05520441FD000BDE1A6 /* DataProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7484B05320441FD000BDE1A6 /* DataProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74B79258202B3254006BCB41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B79257202B3254006BCB41 /* AppDelegate.swift */; };
 		74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B7925E202B3254006BCB41 /* Assets.xcassets */; };
+		CE6D676A24DFB6C3002FE7F2 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D676924DFB6C3002FE7F2 /* UserListViewController.swift */; };
+		CE6D676C24DFB887002FE7F2 /* UserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D676B24DFB887002FE7F2 /* UserListTableViewCell.swift */; };
+		CE6D676E24E02574002FE7F2 /* YellowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D676D24E02574002FE7F2 /* YellowViewController.swift */; };
+		CE6D677024E0373A002FE7F2 /* GreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D676F24E0373A002FE7F2 /* GreenViewController.swift */; };
+		CE6D677224E03B8D002FE7F2 /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6D677124E03B8D002FE7F2 /* UserListTableViewCell.xib */; };
 		CE6E2D5224D947DA00A4B08B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E2D5124D947DA00A4B08B /* ProfileViewController.swift */; };
 		CE6E2D5424D96A4C00A4B08B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E2D5324D96A4C00A4B08B /* Data.swift */; };
 		CE6E2D5624D9BD3300A4B08B /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E2D5524D9BD3300A4B08B /* FeedTableViewCell.swift */; };
@@ -43,6 +48,11 @@
 		74B79257202B3254006BCB41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74B7925E202B3254006BCB41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74B79263202B3254006BCB41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE6D676924DFB6C3002FE7F2 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		CE6D676B24DFB887002FE7F2 /* UserListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListTableViewCell.swift; sourceTree = "<group>"; };
+		CE6D676D24E02574002FE7F2 /* YellowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowViewController.swift; sourceTree = "<group>"; };
+		CE6D676F24E0373A002FE7F2 /* GreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenViewController.swift; sourceTree = "<group>"; };
+		CE6D677124E03B8D002FE7F2 /* UserListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserListTableViewCell.xib; sourceTree = "<group>"; };
 		CE6E2D5124D947DA00A4B08B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE6E2D5324D96A4C00A4B08B /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		CE6E2D5524D9BD3300A4B08B /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -97,11 +107,14 @@
 		74B7927B202B3427006BCB41 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				74B79257202B3254006BCB41 /* AppDelegate.swift */,
 				CE6E2D5324D96A4C00A4B08B /* Data.swift */,
 				CED3279724DEE22900BB1A80 /* Feed */,
 				CED3279824DEE23C00BB1A80 /* Profile */,
-				74B79257202B3254006BCB41 /* AppDelegate.swift */,
+				CE6D676824DFB67A002FE7F2 /* User list */,
 				CECB0BFA24C86E870086A593 /* Main.storyboard */,
+				CE6D676D24E02574002FE7F2 /* YellowViewController.swift */,
+				CE6D676F24E0373A002FE7F2 /* GreenViewController.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -121,6 +134,16 @@
 				74B79263202B3254006BCB41 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE6D676824DFB67A002FE7F2 /* User list */ = {
+			isa = PBXGroup;
+			children = (
+				CE6D676924DFB6C3002FE7F2 /* UserListViewController.swift */,
+				CE6D676B24DFB887002FE7F2 /* UserListTableViewCell.swift */,
+				CE6D677124E03B8D002FE7F2 /* UserListTableViewCell.xib */,
+			);
+			path = "User list";
 			sourceTree = "<group>";
 		};
 		CED3279724DEE22900BB1A80 /* Feed */ = {
@@ -207,6 +230,7 @@
 			files = (
 				CED3279024DE6E4000BB1A80 /* PhotoCollectionViewCell.xib in Resources */,
 				CECB0BFD24C86FFA0086A593 /* LaunchScreen.storyboard in Resources */,
+				CE6D677224E03B8D002FE7F2 /* UserListTableViewCell.xib in Resources */,
 				CED3279424DED5EC00BB1A80 /* HeaderProfileCollectionView.xib in Resources */,
 				74B7925F202B3254006BCB41 /* Assets.xcassets in Resources */,
 				CECB0BFB24C86E870086A593 /* Main.storyboard in Resources */,
@@ -221,7 +245,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				74B79258202B3254006BCB41 /* AppDelegate.swift in Sources */,
+				CE6D676C24DFB887002FE7F2 /* UserListTableViewCell.swift in Sources */,
+				CE6D677024E0373A002FE7F2 /* GreenViewController.swift in Sources */,
+				CE6D676A24DFB6C3002FE7F2 /* UserListViewController.swift in Sources */,
 				CECB0BFF24C8725D0086A593 /* FeedViewController.swift in Sources */,
+				CE6D676E24E02574002FE7F2 /* YellowViewController.swift in Sources */,
 				CE6E2D5424D96A4C00A4B08B /* Data.swift in Sources */,
 				CE6E2D5224D947DA00A4B08B /* ProfileViewController.swift in Sources */,
 				CE6E2D5624D9BD3300A4B08B /* FeedTableViewCell.swift in Sources */,
