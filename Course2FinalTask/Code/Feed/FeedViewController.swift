@@ -25,9 +25,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         feedTableView.dataSource = self
         feedTableView.delegate = self
         feedTableView.separatorStyle = .none
-                
-//        feedTableView.estimatedRowHeight = 144.0
-//        feedTableView.rowHeight = UITableView.automaticDimension
     }
     
 //    func imgFaild_Click(sender: UITapGestureRecognizer) {
@@ -35,10 +32,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        let indexPath = self.feedTableView.indexPathForRow(at: location)
 //        //do something with the indexPath
 //    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 510
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
