@@ -12,7 +12,7 @@ import DataProvider
 
 protocol GestureFromCellDelegate: UIViewController {
     func tapAuthorOfPost(currentPost: Post)
-    func tapLikesCountLabel()
+    func tapLikesCountLabel(currentPost: Post)
 }
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -25,6 +25,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         feedTableView.dataSource = self
         feedTableView.delegate = self
         feedTableView.separatorStyle = .none
+        
+        // Заполнение хранилища лайков данными
+        feedPosts.forEach { likesStorage[$0.id] = DataProviders.shared.postsDataProvider.usersLikedPost(with: $0.id) }
     }
     
 //    func imgFaild_Click(sender: UITapGestureRecognizer) {
@@ -34,25 +37,28 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return feedPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FeedTableViewCell
-        cell.fillingCell(posts[indexPath.row])
+        cell.fillingCell(feedPosts[indexPath.row])
         cell.delegate = self
         return cell
     }
 }
 
 extension FeedViewController: GestureFromCellDelegate {
+    
     func tapAuthorOfPost(currentPost: Post) {
         
         navigationController?.show(YellowViewController(), sender: nil)
+        
     }
     
-    func tapLikesCountLabel() {
+    func tapLikesCountLabel(currentPost: Post) {
         print("Ura")
+        
 //        addChild(YellowViewController())
 //        view.addSubview(YellowViewController().view)
 //        didMove(toParent: self)
