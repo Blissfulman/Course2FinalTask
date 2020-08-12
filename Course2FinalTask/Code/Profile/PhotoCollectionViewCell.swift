@@ -14,14 +14,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImage: UIImageView!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//    }
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//    }
-    
     func configure(_ photo: UIImage) {
         photoImage.image = photo
     }

@@ -9,16 +9,11 @@
 import Foundation
 import DataProvider
 
-// Массив постов ленты
+/// Массив постов ленты
 var feedPosts = DataProviders.shared.postsDataProvider.feed()
 
-// Текущий пользователь
+/// Текущий пользователь
 let currentUser = DataProviders.shared.usersDataProvider.currentUser()
 
-// Словарь, хранящий юзеров, лайкнувших посты ленты (хранилище лайков)
+/// Словарь, хранящий юзеров, лайкнувших посты ленты (хранилище лайков)
 var likesStorage: [Post.Identifier : [User.Identifier]] = [:]
-
-//let followingUsers = DataProviders.shared.usersDataProvider.usersFollowingUser(with: currentUser.id)
-//let followedUsers = DataProviders.shared.usersDataProvider.usersFollowedByUser(with: currentUser.id)
-//let likes = [DataProviders.shared.postsDataProvider.]
-//    var followers: [(userID: User.Identifier, followingID: User.Identifier)]

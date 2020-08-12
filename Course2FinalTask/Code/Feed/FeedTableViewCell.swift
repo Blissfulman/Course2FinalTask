@@ -59,14 +59,6 @@ class FeedTableViewCell: UITableViewCell {
         likeImage.addGestureRecognizer(likeImageGR)
     }
     
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//    }
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//    }
-    
     private func setDateAndTime(_ date: Date) -> String {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .medium
@@ -76,11 +68,14 @@ class FeedTableViewCell: UITableViewCell {
     }
     
     private func setCountLikesForPost(_ post: Post) -> String {
-        let count = likesStorage[post.id]!.count
-        return "Likes: " + String(count)
+        if let likes = likesStorage[post.id] {
+            return "Likes: " + String(likes.count)
+        } else {
+            return "Likes: ?"
+        }
     }
     
-    private func setLikeImage(_ post: Post) {
+    private func setLikeImageColor(_ post: Post) {
         likeImage.tintColor = post.currentUserLikesThisPost ? .systemBlue : .lightGray
     }
     
@@ -90,7 +85,7 @@ class FeedTableViewCell: UITableViewCell {
         createdTimeLabel.text = setDateAndTime(post.createdTime)
         postImage.image = post.image
         likesCountLabel.text = setCountLikesForPost(post)
-        setLikeImage(post)
+        setLikeImageColor(post)
         descriptionLabel.text = post.description
         
         cellPost = post
@@ -120,18 +115,28 @@ class FeedTableViewCell: UITableViewCell {
     
     @IBAction func tapAuthorOfPost(recognizer: UIGestureRecognizer) {        
         guard let post = cellPost else { return }
-        delegate?.tapAuthorOfPost(currentPost: post)
+        if let user = DataProviders.shared.usersDataProvider.user(with: post.author) {
+            delegate?.tapAuthorOfPost(user: user)
+        }
     }
     
     @IBAction func tapLikesCountLabel(recognizer: UIGestureRecognizer) {
         guard let post = cellPost else { return }
-        delegate?.tapLikesCountLabel(currentPost: post)
+        
+        // Создание массива юзеров, лайкнувших пост
+        guard let userIDList = likesStorage[post.id] else { return }
+        var userList: [User] = []
+        userIDList.forEach {
+            userList.append(DataProviders.shared.usersDataProvider.user(with: $0)!)
+        }
+        
+        delegate?.tapLikesCountLabel(userList: userList)
     }
     
     // Лайк, либо отмена лайка поста
     private func likeUnlikePost() {
         
-        guard let currentPost = cellPost else { fatalError("No post") }
+        guard let currentPost = cellPost else { return }
                 
         // Обновление данных в хранилище лайков и в массиве постов ленты
         for (index, post) in feedPosts.enumerated() {
@@ -152,7 +157,7 @@ class FeedTableViewCell: UITableViewCell {
                 feedPosts[index].currentUserLikesThisPost = !feedPosts[index].currentUserLikesThisPost
                 
                 // Смена цвета сердечка
-                setLikeImage(feedPosts[index])
+                setLikeImageColor(feedPosts[index])
             }
         }
     }

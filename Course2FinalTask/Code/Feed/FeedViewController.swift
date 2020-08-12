@@ -11,8 +11,8 @@ import UIKit
 import DataProvider
 
 protocol GestureFromCellDelegate: UIViewController {
-    func tapAuthorOfPost(currentPost: Post)
-    func tapLikesCountLabel(currentPost: Post)
+    func tapAuthorOfPost(user: User)
+    func tapLikesCountLabel(userList: [User])
 }
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -30,12 +30,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         feedPosts.forEach { likesStorage[$0.id] = DataProviders.shared.postsDataProvider.usersLikedPost(with: $0.id) }
     }
     
-//    func imgFaild_Click(sender: UITapGestureRecognizer) {
-//        let location = sender.location(in: self.feedTableView)
-//        let indexPath = self.feedTableView.indexPathForRow(at: location)
-//        //do something with the indexPath
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feedPosts.count
     }
@@ -50,27 +44,15 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 extension FeedViewController: GestureFromCellDelegate {
     
-    func tapAuthorOfPost(currentPost: Post) {
-        
-        navigationController?.show(YellowViewController(), sender: nil)
-        
+    func tapAuthorOfPost(user: User) {
+        guard let profileVC = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController else { return }
+        profileVC.user = user
+        show(profileVC, sender: nil)
     }
     
-    func tapLikesCountLabel(currentPost: Post) {
-        print("Ura")
-        
-//        addChild(YellowViewController())
-//        view.addSubview(YellowViewController().view)
-//        didMove(toParent: self)
-//        let vc = YellowViewController()
-        
-//        show(UserListViewController(frame: self.view.accessibilityFrame), sender: nil)
-        
-        show(UserListViewController(), sender: nil)
-        
-//        navigationController?.pushViewController(UserListViewController(), animated: true)
-        
-//        show(YellowViewController(), sender: nil)
-        
+    func tapLikesCountLabel(userList: [User]) {
+        let likesCV = UserListViewController(userList: userList)
+        likesCV.title = "Likes"
+        show(likesCV, sender: nil)
     }
 }
