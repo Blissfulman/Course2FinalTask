@@ -10,26 +10,24 @@ import Foundation
 import UIKit
 import DataProvider
 
-protocol GestureFromCellDelegate: UIViewController {
-    func tapAuthorOfPost(user: User)
-    func tapLikesCountLabel(userList: [User])
-}
-
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-        
+    
+    // MARK: - Свойства
+    /// Массив постов ленты
+    private lazy var feedPosts = DataProviders.shared.postsDataProvider.feed()
+    
     @IBOutlet weak var feedTableView: UITableView!
-        
+    
+    // MARK: - Методы жизненного цикла
     override func viewDidLoad() {
         super.viewDidLoad()
         
         feedTableView.dataSource = self
         feedTableView.delegate = self
         feedTableView.separatorStyle = .none
-        
-        // Заполнение хранилища лайков данными
-        feedPosts.forEach { likesStorage[$0.id] = DataProviders.shared.postsDataProvider.usersLikedPost(with: $0.id) }
     }
     
+    // MARK: - CollectionViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return feedPosts.count
     }
@@ -42,17 +40,25 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 }
 
-extension FeedViewController: GestureFromCellDelegate {
+// MARK: - FeedTableViewCellDelegate
+extension FeedViewController: FeedTableViewCellDelegate {
     
+    /// Переход в профиль автора поста
     func tapAuthorOfPost(user: User) {
         guard let profileVC = storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController else { return }
         profileVC.user = user
         show(profileVC, sender: nil)
     }
     
+    /// Переход на экран лайкнувших пост пользователей
     func tapLikesCountLabel(userList: [User]) {
         let likesCV = UserListViewController(userList: userList)
         likesCV.title = "Likes"
         show(likesCV, sender: nil)
+    }
+    
+    /// Обновление данных массива постов ленты
+    func updateFeedData() {
+        feedPosts = DataProviders.shared.postsDataProvider.feed()
     }
 }

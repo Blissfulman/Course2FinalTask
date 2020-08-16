@@ -10,21 +10,29 @@ import Foundation
 import UIKit
 import DataProvider
 
-class HeaderProfileCollectionView: UICollectionReusableView {
+protocol HeaderProfileCollectionViewDelegate: AnyObject {
+    func tapFollowersLabel()
+    func tapFollowingLabel()
+}
 
-    weak var delegate: GestureFromHeaderDelegate?
+class HeaderProfileCollectionView: UICollectionReusableView {
+    
+    // MARK: - Свойства
+    weak var delegate: HeaderProfileCollectionViewDelegate?
     
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     
+    // MARK: - Методы жизненного цикла
     override func awakeFromNib() {
         super.awakeFromNib()
         
         setGestureRecognizers()
     }
     
+    // MARK: - Настройка элементов ячейки
     func configure(user: User) {
         avatarImage.image = user.avatar
         avatarImage.layer.cornerRadius = CGFloat(avatarImage.bounds.width / 2)
@@ -33,6 +41,7 @@ class HeaderProfileCollectionView: UICollectionReusableView {
         followingLabel.text = "Following: " + String(user.followedByCount)
     }
     
+    // MARK: - Распознователи жестов
     private func setGestureRecognizers() {
         
         // Жест тапа по подписчикам
@@ -46,6 +55,7 @@ class HeaderProfileCollectionView: UICollectionReusableView {
         followingLabel.addGestureRecognizer(followingGR)
     }
     
+    // MARK: - Действия на жесты
     @IBAction func tapFollowersLabel(recognizer: UIGestureRecognizer) {
         delegate?.tapFollowersLabel()
     }

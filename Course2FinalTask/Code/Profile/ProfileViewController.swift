@@ -10,32 +10,24 @@ import Foundation
 import UIKit
 import DataProvider
 
-protocol GestureFromHeaderDelegate: UIViewController {
-    func tapFollowersLabel()
-    func tapFollowingLabel()
-}
-
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var photosCollectionView: UICollectionView!
     
-    var photosOfUser = [UIImage]()
+    // MARK: - Свойства
+    /// Массив фотографий постов пользователя
+    lazy var photosOfUser = [UIImage]()
     
     // По умолчанию вью отображает данные текущего пользователя
-    var user: User = currentUser
+    lazy var user: User = DataProviders.shared.usersDataProvider.currentUser()
     
+    // MARK: - Инициализаторы
     convenience init(user: User) {
         self.init()
         self.user = user
     }
-
-    // Получение фотографий постов пользователя
-    private func getPhotos(_ user: User) {
-        if let filteredPosts = DataProviders.shared.postsDataProvider.findPosts(by: user.id) {
-            filteredPosts.forEach { photosOfUser.append($0.image) }
-        }
-    }
     
+    // MARK: - Методы жизненного цикла
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,12 +35,21 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         
         photosCollectionView.register(UINib(nibName: "PhotoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
         photosCollectionView.register(UINib(nibName: "HeaderProfileCollectionView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerProfile")
-
-        photosCollectionView.delegate = self
+        
         photosCollectionView.dataSource = self
+        photosCollectionView.delegate = self
         getPhotos(user)
     }
     
+    // MARK: - Методы получения данных
+    /// Получение фотографий постов пользователя
+    private func getPhotos(_ user: User) {
+        if let filteredPosts = DataProviders.shared.postsDataProvider.findPosts(by: user.id) {
+            filteredPosts.forEach { photosOfUser.append($0.image) }
+        }
+    }
+    
+    // MARK: - СollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         switch kind {
@@ -73,26 +74,26 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout, GestureFromHeaderDelegate {
+extension ProfileViewController: UICollectionViewDelegateFlowLayout, HeaderProfileCollectionViewDelegate {
     
+    // MARK: - Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = photosCollectionView.bounds.width / 3
         return CGSize(width: size, height: size)
     }
     
+    // MARK: - Навигация
     func tapFollowersLabel() {
-        if let userList = DataProviders.shared.usersDataProvider.usersFollowedByUser(with: user.id) {
-            let followersVC = UserListViewController(userList: userList)
-            followersVC.title = "Followers"
-            navigationController?.pushViewController(followersVC, animated: true)
-        }
+        guard let userList = DataProviders.shared.usersDataProvider.usersFollowedByUser(with: user.id) else { return }
+        let followersVC = UserListViewController(userList: userList)
+        followersVC.title = "Followers"
+        navigationController?.pushViewController(followersVC, animated: true)
     }
     
     func tapFollowingLabel() {
-        if let userList = DataProviders.shared.usersDataProvider.usersFollowingUser(with: user.id) {
-            let followingVC = UserListViewController(userList: userList)
-            followingVC.title = "Following"
-            navigationController?.pushViewController(followingVC, animated: true)
-        }
+        guard let userList = DataProviders.shared.usersDataProvider.usersFollowingUser(with: user.id) else { return }
+        let followingVC = UserListViewController(userList: userList)
+        followingVC.title = "Following"
+        navigationController?.pushViewController(followingVC, animated: true)
     }
 }

@@ -10,13 +10,10 @@ import UIKit
 import DataProvider
 
 class UserListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-        
-    var userList: [User] = []
     
-    convenience init(userList: [User]) {
-        self.init()
-        self.userList = userList
-    }
+    // MARK: - Свойства
+    /// Список пользователей для отображения в таблице
+    private var userList: [User] = []
     
     private lazy var userListTableView: UITableView = {
         let tableView = UITableView()
@@ -24,20 +21,17 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         return tableView
     }()
     
-    private func setupUI() {
-        view.addSubview(userListTableView)
+    // MARK: - Инициализаторы
+    convenience init(userList: [User]) {
+        self.init()
+        self.userList = userList
     }
     
-    private func setupConstraints() {
-        userListTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        userListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        userListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        userListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    }
+    // MARK: - Методы жизненного цикла
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         setupConstraints()
         userListTableView.dataSource = self
@@ -50,6 +44,21 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         userListTableView.deselectRow(at: selectedRow, animated: true)
     }
     
+    // MARK: - Layout
+    private func setupUI() {
+        view.addSubview(userListTableView)
+    }
+    
+    private func setupConstraints() {
+        let constraints = [
+            userListTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            userListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            userListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            userListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    // MARK: - TableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         userList.count
     }
@@ -60,7 +69,8 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = userList[indexPath.row].fullName
         return cell
     }
-    
+
+    // MARK: - TableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
@@ -73,8 +83,9 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: - Переход на вью пользователя
     @available(iOS 13.0, *)
-    func goToUserProfileVC(user: User) {
+    private func goToUserProfileVC(user: User) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let profileVC = storyboard.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else { return }
         profileVC.user = user
