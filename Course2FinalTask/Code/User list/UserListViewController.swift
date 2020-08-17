@@ -75,20 +75,11 @@ class UserListViewController: UIViewController, UITableViewDataSource, UITableVi
         return 45
     }
     
+    // Переход на вью пользователя
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if #available(iOS 13.0, *) {
-            goToUserProfileVC(user: userList[indexPath.row])
-        } else {
-            fatalError("Not available on iOS version below 13.0")
-        }
-    }
-    
-    // MARK: - Переход на вью пользователя
-    @available(iOS 13.0, *)
-    private func goToUserProfileVC(user: User) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let profileVC = storyboard.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else { return }
-        profileVC.user = user
+        guard let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController else { return }
+        profileVC.user = userList[indexPath.row]
         show(profileVC, sender: nil)
     }
 }

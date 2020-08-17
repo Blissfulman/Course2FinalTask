@@ -21,12 +21,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     // По умолчанию вью отображает данные текущего пользователя
     lazy var user: User = DataProviders.shared.usersDataProvider.currentUser()
     
-    // MARK: - Инициализаторы
-    convenience init(user: User) {
-        self.init()
-        self.user = user
-    }
-    
     // MARK: - Методы жизненного цикла
     override func viewDidLoad() {
         super.viewDidLoad()
